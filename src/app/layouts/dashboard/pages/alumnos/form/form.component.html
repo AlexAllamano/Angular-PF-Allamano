@@ -6,8 +6,9 @@
   </mat-card-header>
 
 
+
 <ng-container *ngIf="alumnoEdit; else nuevo">
-  <div class="pt-5 pb-3">
+  <div class="pt-3 pb-3">
     <form [formGroup]="formulario">
       <div class="row">
         <mat-form-field class="col-md-6 col-sm-12">
@@ -85,7 +86,7 @@
 </ng-container>
 
 <ng-template #nuevo>
-  <div class="pt-5 pb-3">
+  <div class="pt-3 pb-3">
     <form [formGroup]="formulario">
       <div class="row">
         <mat-form-field class="col-md-6 col-sm-12">

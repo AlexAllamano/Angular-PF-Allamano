@@ -7,6 +7,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { AlumnosModule } from './pages/alumnos/alumnos.module';
 import { MatTableModule } from '@angular/material/table';
+import { HelpersModule } from '../../helpers/helpers.module';
 
 @NgModule({
   declarations: [DashboardComponent],

@@ -13,11 +13,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import { NombreApellidoPipe } from '../../../../helpers/pipes/nombre-apellido.pipe';
+import { HelpersModule } from '../../../../helpers/helpers.module';
 
 
 @NgModule({
-  declarations: [AlumnosComponent, FormComponent, ListadoComponent, NombreApellidoPipe],
+  declarations: [AlumnosComponent, FormComponent, ListadoComponent],
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -28,7 +28,8 @@ import { NombreApellidoPipe } from '../../../../helpers/pipes/nombre-apellido.pi
     ReactiveFormsModule,
     MatTableModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,    
+    HelpersModule
   ],
   exports: [AlumnosComponent],
 })

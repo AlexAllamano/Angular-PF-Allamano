@@ -2,11 +2,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Alumno } from '../../models/alumnos.model';
 
 @Pipe({
-  name: 'nombreApellido'
+  name: 'nombreCompleto'
 })
 export class NombreApellidoPipe implements PipeTransform {
 
-  transform(alumno: any): string {
-    return `${alumno.nombre} ${alumno.apellido}`;
+  transform(value: Alumno, ...args: unknown[]): unknown {
+    return `${value.nombre} ${value.apellido}`;
   }
+
 }
