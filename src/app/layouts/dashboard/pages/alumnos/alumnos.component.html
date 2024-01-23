@@ -1,0 +1,10 @@
+<app-form
+  (nuevoAlumnoCreado)="agregarAlumno($event)"
+  (alumnoEditado)="guardarEdicion($event)"
+  [alumnoEdit]="alumnoAeditar"
+></app-form>
+<app-listado
+  [alumnos]="alumnos"
+  (borrarAlumno)="borrarAlumno($event)"
+  (editarAlumno)="editarAlumno($event)"
+></app-listado>
