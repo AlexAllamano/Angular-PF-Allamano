@@ -6,10 +6,9 @@ import {
   OnInit,
   Output,
   SimpleChanges,
-  input,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Alumno } from '../../../../../models/alumnos.model';
+import { Alumno } from '../../../../../models/alumno.model';
 
 @Component({
   selector: 'app-form',
@@ -43,7 +42,6 @@ export class FormComponent implements OnInit, OnChanges {
   private mostrarDatosEdit() {
     this.formulario?.get('nombre').setValue(this.alumnoEdit?.nombre);
     this.formulario?.get('apellido').setValue(this.alumnoEdit?.apellido);
-    this.formulario?.get('curso').setValue(this.alumnoEdit?.curso);
     this.formulario?.get('correo').setValue(this.alumnoEdit?.correo);
     this.formulario?.get('edad').setValue(this.alumnoEdit?.edad);
     this.formulario?.get('sexo').setValue(this.alumnoEdit?.sexo);
@@ -64,45 +62,40 @@ export class FormComponent implements OnInit, OnChanges {
         ],
       ],
       correo: ['', [Validators.required, Validators.email]],
-      curso: ['', Validators.required],
     });
   }
 
   enviarFormulario() {
     if (this.formulario.valid) {
-      
-        this.nuevoAlumno = {
-          nombre: this.formulario.value.nombre,
-          apellido: this.formulario.value.apellido,
-          curso: this.formulario.value.curso,
-          correo: this.formulario.value.correo,
-          id: Date.now(),
-          edad: this.formulario.value.edad,
-          sexo: this.formulario.value.sexo,
-        };
+      this.nuevoAlumno = {
+        nombre: this.formulario.value.nombre,
+        apellido: this.formulario.value.apellido,
+        cursos: [],
+        correo: this.formulario.value.correo,
+        id: Date.now(),
+        edad: this.formulario.value.edad,
+        sexo: this.formulario.value.sexo,
+      };
       this.nuevoAlumnoCreado.emit(this.nuevoAlumno);
       this.formulario.reset();
+    } else {
     }
   }
 
   guardarEdicion() {
     if (this.formulario.valid) {
-
-      console.log(this.alumnoEdit.id, 'ID DEL ALUMNO EDITADO')
-      
       this.nuevoAlumno = {
         nombre: this.formulario.value.nombre,
         apellido: this.formulario.value.apellido,
-        curso: this.formulario.value.curso,
+        cursos: [],
         correo: this.formulario.value.correo,
         id: this.alumnoEdit.id,
         edad: this.formulario.value.edad,
         sexo: this.formulario.value.sexo,
       };
 
-      console.log(this.nuevoAlumno)
-
       this.alumnoEditado.emit(this.nuevoAlumno);
+      this.alumnoEdit = null;
       this.formulario.reset();
     }
   }
@@ -111,5 +104,4 @@ export class FormComponent implements OnInit, OnChanges {
     this.alumnoEdit = null;
     this.formulario.reset();
   }
-
 }

@@ -7,7 +7,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { AlumnosModule } from './pages/alumnos/alumnos.module';
 import { MatTableModule } from '@angular/material/table';
-import { HelpersModule } from '../../helpers/helpers.module';
+import { CursosModule } from './pages/cursos/cursos.module';
+import { RouterModule } from '@angular/router';
+import { AlumnosComponent } from './pages/alumnos/alumnos.component';
+import { DetalleAlumnoComponent } from './pages/alumnos/detalle-alumno/detalle-alumno.component';
+import { MatListModule } from '@angular/material/list';
+import { HomeComponent } from './pages/home/home.component';
+import { CursosComponent } from './pages/cursos/cursos.component';
+import { MatCardModule } from '@angular/material/card';
+import { HomeModule } from './pages/home/home.module';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -18,7 +26,34 @@ import { HelpersModule } from '../../helpers/helpers.module';
     MatToolbarModule,
     MatIconModule,
     MatTableModule,
+    MatListModule,
+    MatCardModule,
     AlumnosModule,
+    CursosModule,
+    HomeModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
+      },
+      {
+        path: 'home',
+        component: HomeComponent,
+      },
+      {
+        path: 'cursos',
+        component: CursosComponent,
+      },
+      {
+        path: 'alumnos',
+        component: AlumnosComponent,
+      },
+      {
+        path: 'alumnos/:id',
+        component: DetalleAlumnoComponent,
+      },
+    ]),
   ],
   exports: [DashboardComponent],
 })

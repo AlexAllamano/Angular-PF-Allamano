@@ -14,10 +14,12 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { HelpersModule } from '../../../../helpers/helpers.module';
+import { RouterModule } from '@angular/router';
+import { DetalleAlumnoComponent } from './detalle-alumno/detalle-alumno.component';
 
 
 @NgModule({
-  declarations: [AlumnosComponent, FormComponent, ListadoComponent],
+  declarations: [AlumnosComponent, FormComponent, ListadoComponent, DetalleAlumnoComponent],
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -29,7 +31,8 @@ import { HelpersModule } from '../../../../helpers/helpers.module';
     MatTableModule,
     MatIconModule,
     MatCardModule,    
-    HelpersModule
+    HelpersModule,
+    RouterModule
   ],
   exports: [AlumnosComponent],
 })

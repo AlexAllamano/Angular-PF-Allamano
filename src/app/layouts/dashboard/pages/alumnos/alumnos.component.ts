@@ -1,56 +1,87 @@
-import { Component } from '@angular/core';
-import { Alumno } from '../../../../models/alumnos.model';
+import { Component, OnInit } from '@angular/core';
+import { Alumno } from '../../../../models/alumno.model';
+import { AlumnosService } from '../../../../core/services/alumnos.service';
+import { LoadingService } from '../../../../core/services/loading.service';
+import { AlertasService } from '../../../../core/services/alertas.service';
 
 @Component({
   selector: 'app-alumnos',
   templateUrl: './alumnos.component.html',
-  styleUrl: './alumnos.component.scss',
+  styleUrls: ['./alumnos.component.scss'],
 })
-export class AlumnosComponent {
-  alumnos: Alumno[] = [
-    {
-      id: 1,
-      nombre: 'Alex',
-      apellido: 'Allamano',
-      correo: 'aallamano@gmail.com',
-      sexo: 'Masculino',
-      edad: 24,
-      curso: 'Historia',
-    },
-    {
-      id: 2,
-      nombre: 'Constanza',
-      apellido: 'Rodríguez',
-      correo: 'crodriguez@gmail.com',
-      sexo: 'Femenino',
-      edad: 20,
-      curso: 'Lengua',
-    },
-  ];
-
+export class AlumnosComponent implements OnInit {
+  alumnos: Alumno[] = [];
   alumnoAeditar: Alumno = null;
 
+  constructor(
+    private alumnosService: AlumnosService,
+    private loadingService: LoadingService,
+    private alertasService: AlertasService
+  ) {}
+
+  ngOnInit(): void {
+    this.loadingService.estaCargando(true);
+
+    this.alumnosService.obtenerAlumnos().subscribe({
+      next: (alumnos) => {
+        this.alumnos = alumnos;
+      },
+      complete: () => {
+        this.loadingService.estaCargando(false);
+      },
+    });
+  }
+
   agregarAlumno(nuevoAlumno: Alumno) {
-    console.log(nuevoAlumno)
-    this.alumnos = [...this.alumnos, nuevoAlumno]
+    this.alumnosService.agregarAlumno(nuevoAlumno).subscribe({
+      next: (alumnos) => {
+        this.alumnos = [...alumnos];
+      },
+      error: () => {
+        this.alertasService.mostrarError();
+      },
+      complete: () => {
+        this.loadingService.estaCargando(false);
+        this.alertasService.mostrarOk('Alumno agregado');
+      },
+    });
   }
 
-  editarAlumno(alumno: Alumno){
-    this.alumnoAeditar = null;
+  editarAlumno(alumno: Alumno) {
     this.alumnoAeditar = alumno;
-    console.log(alumno, 'ALUMNO A EDITAR')
   }
 
-  guardarEdicion(alumno: Alumno){
-    this.alumnos[this.alumnos.indexOf(this.alumnos.find(item => item.id == alumno.id))] = alumno;
+  guardarEdicion(alumno: Alumno) {
+    this.loadingService.estaCargando(true);
 
-    this.alumnos = [...this.alumnos]
-
-    this.alumnoAeditar = null;
+    this.alumnosService.editarAlumno(alumno).subscribe({
+      next: (alumnos) => {
+        this.alumnos = [...alumnos];
+      },
+      error: () => {
+        this.alertasService.mostrarError();
+      },
+      complete: () => {
+        this.loadingService.estaCargando(false);
+        this.alertasService.mostrarOk('Alumno modificado');
+      },
+    });
   }
 
-  borrarAlumno(idAlumno:number){
-    console.log(this.alumnos.find(item => {return item.id == idAlumno}), 'ALUMNO A EDITAR')
-    this.alumnos = this.alumnos.filter(item => {return item.id != idAlumno})
+  borrarAlumno(idAlumno: number) {
+    this.loadingService.estaCargando(true);
+
+    this.alumnosService.borrarAlumno(idAlumno).subscribe({
+      next: (alumnos) => {
+        this.alumnos = [...alumnos];
+      },
+      error: () => {
+        this.alertasService.mostrarError();
+      },
+      complete: () => {
+        this.loadingService.estaCargando(false);
+        this.alertasService.mostrarOk('Alumno borrado');
+      },
+    });
   }
 }

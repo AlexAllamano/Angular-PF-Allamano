@@ -1,13 +1,25 @@
 <mat-drawer-container class="dashboard" autosize>
-  <mat-drawer #navLateral class="bg-azul w-25 text-center container pt-5" mode="over">
-    <button mat-icon-button aria-label="Example icon-button with menu icon" (click)="navLateral.toggle()">
-      <mat-icon>close</mat-icon>
-    </button>
-    <p>Auto-resizing sidenav</p>
+  <mat-drawer #navLateral class="bg-azul w-25 mw-25 container pt-5" mode="push">
+    <div class="text-center">
+      <button mat-icon-button aria-label="Example icon-button with menu icon" (click)="navLateral.toggle()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <mat-nav-list>
+      <div class="d-flex justify-content-start align-items-center">
+        <mat-icon color="m-0 p-0">home</mat-icon><a (click)="navLateral.toggle()" routerLink="home" mat-list-item>  Inicio </a>
+      </div>
+      <div class="d-flex justify-content-start align-items-center">
+        <mat-icon color="m-0 p-0">people</mat-icon><a (click)="navLateral.toggle()" routerLink="alumnos" mat-list-item>  Alumnos </a>
+      </div>
+      <div class="d-flex justify-content-start align-items-center">
+        <mat-icon color="m-0 p-0">collections_bookmark</mat-icon><a (click)="navLateral.toggle()" routerLink="cursos" mat-list-item>  Cursos </a>
+      </div>
+    </mat-nav-list>
 
   </mat-drawer>
 
-  <mat-drawer color="primary" #perfil class="bg-azul w-25 text-center container pt-5" mode="over" position="end">
+  <mat-drawer color="primary" #perfil class="bg-azul w-25 mw-25 text-center container pt-5" mode="over" position="end">
     <button mat-icon-button aria-label="Example icon-button with menu icon" (click)="perfil.toggle()">
       <mat-icon>close</mat-icon>
     </button>
@@ -15,7 +27,7 @@
   </mat-drawer>
 
   <mat-toolbar color="primary" class="sticky ">
-    <div class="container d-flex justify-content-between aling-items-center">
+    <div class="container d-flex justify-content-between align-items-center">
       <button
         mat-icon-button
         class="icono"
@@ -40,7 +52,7 @@
   <div class="container">
 
 
-    <app-alumnos></app-alumnos>
+    <router-outlet></router-outlet>
 
    
 

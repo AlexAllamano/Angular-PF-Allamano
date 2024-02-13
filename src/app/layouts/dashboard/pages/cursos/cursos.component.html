@@ -1,0 +1,11 @@
+<app-form
+  (nuevoCursoCreado)="agregarCurso($event)"
+  (cursoEditado)="guardarEdicion($event)"
+  [cursoEdit]="cursoAeditar"
+></app-form>
+
+<app-listado
+  [cursos]="cursos"
+  (borrarCurso)="borrarCurso($event)"
+  (editarCurso)="editarCurso($event)"
+></app-listado>

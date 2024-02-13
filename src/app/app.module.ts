@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from './layouts/auth/auth.module';
 import { DashboardModule } from './layouts/dashboard/dashboard.module';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,8 +20,10 @@ import { DashboardModule } from './layouts/dashboard/dashboard.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatProgressSpinnerModule,
     AuthModule,
     DashboardModule,
+    
   ],
   providers: [{
     provide: LOCALE_ID,

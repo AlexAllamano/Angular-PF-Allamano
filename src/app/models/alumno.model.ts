@@ -1,3 +1,5 @@
+import { Curso } from "./curso.model";
+
 export interface Alumno {
     id: number;
     nombre: string;
@@ -5,5 +7,5 @@ export interface Alumno {
     correo: string;
     sexo: string;
     edad: number;
-    curso: string;
+    cursos: Curso[];
   }
