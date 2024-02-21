@@ -16,7 +16,7 @@ export class AlumnosService {
     private alertaService: AlertasService
   ) {}
 
-  obtenerAlumnos() {
+  obtenerAlumnos(): Observable<Alumno[]> {
     // return of(ALUMNOS_DB).pipe(delay(1000));
     return this.httpClient.get<Alumno[]>(`${enviroment.apiUrl}/alumnos`).pipe(
       catchError((error) => {
@@ -33,7 +33,7 @@ export class AlumnosService {
     return this.httpClient.get<Alumno>(`${enviroment.apiUrl}/alumnos/${id}`);
   }
 
-  agregarAlumno(nuevoAlumno: Alumno) {
+  agregarAlumno(nuevoAlumno: Alumno): Observable<Alumno[]> {
     // ALUMNOS_DB.push(nuevoAlumno);
     // return this.obtenerAlumnos();
 
@@ -48,23 +48,25 @@ export class AlumnosService {
       );
   }
 
-  editarAlumno(alumno: Alumno) {
+  editarAlumno(alumno: Alumno): Observable<Alumno[]> {
     // let index = ALUMNOS_DB.findIndex((a) => a.id === alumno.id);
     // if (index !== -1) {
     //   ALUMNOS_DB[index] = alumno;
     // }
     // return this.obtenerAlumnos();
 
-    return this.httpClient.patch(`${enviroment.apiUrl}/alumnos/${alumno.id}`, alumno).pipe(
-      mergeMap(() => this.obtenerAlumnos()),
-      catchError((error) => {
-        this.alertaService.mostrarError('Error al intentar modificar');
-        return of([]);
-      })
-    );
+    return this.httpClient
+      .patch(`${enviroment.apiUrl}/alumnos/${alumno.id}`, alumno)
+      .pipe(
+        mergeMap(() => this.obtenerAlumnos()),
+        catchError((error) => {
+          this.alertaService.mostrarError('Error al intentar modificar');
+          return of([]);
+        })
+      );
   }
 
-  borrarAlumno(idAlumno: number) {
+  borrarAlumno(idAlumno: number): Observable<Alumno[]> {
     // ALUMNOS_DB = ALUMNOS_DB.filter((a) => a.id !== idAlumno);
     // return this.obtenerAlumnos();
 

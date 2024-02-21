@@ -12,6 +12,17 @@
       "cursos": []
     },
     {
+      "nombre": "Juan",
+      "apellido": "Perez",
+      "correo": "juanperez@gmail.com",
+      "password": "1234",
+      "rol": "ADMIN",
+      "cursos": [],
+      "edad": 23,
+      "id": "123",
+      "sexo": "masculino"
+    },
+    {
       "id": "2",
       "nombre": "Constanza",
       "apellido": "Rodríguez",
