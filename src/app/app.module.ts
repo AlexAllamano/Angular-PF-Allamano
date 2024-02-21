@@ -1,6 +1,6 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 
-import es from '@angular/common/locales/es-ar'
+import es from '@angular/common/locales/es-ar';
 import { registerLocaleData } from '@angular/common';
 
 registerLocaleData(es);
@@ -12,7 +12,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from './layouts/auth/auth.module';
 import { DashboardModule } from './layouts/dashboard/dashboard.module';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,12 +24,14 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatProgressSpinnerModule,
     AuthModule,
     DashboardModule,
-    
+    HttpClientModule
   ],
-  providers: [{
-    provide: LOCALE_ID,
-    useValue: 'es-AR'
-  }],
+  providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: 'es-AR',
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

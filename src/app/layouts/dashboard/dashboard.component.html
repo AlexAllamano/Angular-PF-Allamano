@@ -23,7 +23,11 @@
     <button mat-icon-button aria-label="Example icon-button with menu icon" (click)="perfil.toggle()">
       <mat-icon>close</mat-icon>
     </button>
-    <p>Perfil</p>
+    <mat-nav-list>
+      <div class="d-flex justify-content-start align-items-center">
+        <mat-icon color="m-0 p-0">exit_to_app</mat-icon><a (click)="perfil.toggle(); logout()" routerLink="home" mat-list-item>  Logout </a>
+      </div>
+    </mat-nav-list>
   </mat-drawer>
 
   <mat-toolbar color="primary" class="sticky ">

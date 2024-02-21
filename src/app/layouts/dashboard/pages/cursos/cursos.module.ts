@@ -16,6 +16,7 @@ import { HelpersModule } from '../../../../helpers/helpers.module';
 import { RouterModule } from '@angular/router';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { CursosRoutingModule } from './cursos-routing.module';
 @NgModule({
   declarations: [
     CursosComponent,
@@ -37,7 +38,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     HelpersModule,
     MatNativeDateModule,
     MatDatepickerModule,
-    RouterModule,
+    CursosRoutingModule
   ],
   exports: [CursosComponent],
 })

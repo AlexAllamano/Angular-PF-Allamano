@@ -10,11 +10,11 @@ import { Curso } from '../../../../../models/curso.model';
 })
 export class ListadoComponent {
 
-  constructor(private router: Router){
+  constructor(){
 
   }
 
-  dataSource: MatTableDataSource<Curso>;
+  dataSource: MatTableDataSource<Curso> = new MatTableDataSource<Curso>([]);
   displayedColumns: string[] = ['id','nombre', 'cupo', 'fechaInicio', 'fechaFin', 'acciones']
 
   @Input() set cursos(value: Curso[]) {

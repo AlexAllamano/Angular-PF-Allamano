@@ -1,78 +1,81 @@
 import { Injectable } from '@angular/core';
-import { Observable, delay, of } from 'rxjs';
+import { Observable, catchError, delay, mergeMap, of } from 'rxjs';
 import { Alumno } from '../../models/alumno.model';
+import { HttpClient } from '@angular/common/http';
+import { enviroment } from '../../../enviroments/entiroment';
+import { AlertasService } from './alertas.service';
 
-let ALUMNOS_DB: Alumno[] = [
-  {
-    id: 1,
-    nombre: 'Alex',
-    apellido: 'Allamano',
-    correo: 'aallamano@gmail.com',
-    sexo: 'Masculino',
-    edad: 24,
-    cursos: [
-      {
-        id: 1,
-        nombre: 'Introducción a Angular',
-        fechaInicio: new Date('2024-03-01'),
-        fechaFin: new Date('2024-03-30'),
-        cupo: 30,
-        alumnos: [],
-        profesor: null,
-      },
-    ],
-  },
-  {
-    id: 2,
-    nombre: 'Constanza',
-    apellido: 'Rodríguez',
-    correo: 'crodriguez@gmail.com',
-    sexo: 'Femenino',
-    edad: 20,
-    cursos: [
-      {
-        id: 2,
-        nombre: 'Desarrollo Web con React',
-        fechaInicio: new Date('2024-04-01'),
-        fechaFin: new Date('2024-04-30'),
-        cupo: 25,
-        alumnos: [],
-        profesor: null,
-      },
-    ],
-  },
-];
+let ALUMNOS_DB: Alumno[] = [];
 
 @Injectable({
   providedIn: 'root',
 })
 export class AlumnosService {
-  constructor() {}
+  constructor(
+    private httpClient: HttpClient,
+    private alertaService: AlertasService
+  ) {}
+
+  obtenerAlumnos() {
+    // return of(ALUMNOS_DB).pipe(delay(1000));
+    return this.httpClient.get<Alumno[]>(`${enviroment.apiUrl}/alumnos`).pipe(
+      catchError((error) => {
+        this.alertaService.mostrarError(
+          'Error al cargar los alumnos, intente de nuevo más tarde'
+        );
+        return of([]);
+      })
+    );
+  }
+
+  obtenerAlumnoID(id: string): Observable<Alumno | undefined> {
+    // return of(ALUMNOS_DB.find((a) => a.id == id)).pipe(delay(1000));
+    return this.httpClient.get<Alumno>(`${enviroment.apiUrl}/alumnos/${id}`);
+  }
 
   agregarAlumno(nuevoAlumno: Alumno) {
-    ALUMNOS_DB.push(nuevoAlumno);
-    return this.obtenerAlumnos();
+    // ALUMNOS_DB.push(nuevoAlumno);
+    // return this.obtenerAlumnos();
+
+    return this.httpClient
+      .post<Alumno>(`${enviroment.apiUrl}/alumnos`, nuevoAlumno)
+      .pipe(
+        mergeMap(() => this.obtenerAlumnos()),
+        catchError((error) => {
+          this.alertaService.mostrarError('Error al intentar agregar');
+          return of([]);
+        })
+      );
   }
 
   editarAlumno(alumno: Alumno) {
-    let index = ALUMNOS_DB.findIndex((a) => a.id === alumno.id);
-    if (index !== -1) {
-      ALUMNOS_DB[index] = alumno;
-    }
-    return this.obtenerAlumnos();
+    // let index = ALUMNOS_DB.findIndex((a) => a.id === alumno.id);
+    // if (index !== -1) {
+    //   ALUMNOS_DB[index] = alumno;
+    // }
+    // return this.obtenerAlumnos();
+
+    return this.httpClient.patch(`${enviroment.apiUrl}/alumnos/${alumno.id}`, alumno).pipe(
+      mergeMap(() => this.obtenerAlumnos()),
+      catchError((error) => {
+        this.alertaService.mostrarError('Error al intentar modificar');
+        return of([]);
+      })
+    );
   }
 
   borrarAlumno(idAlumno: number) {
-    ALUMNOS_DB = ALUMNOS_DB.filter((a) => a.id !== idAlumno);
-    return this.obtenerAlumnos();
-  }
+    // ALUMNOS_DB = ALUMNOS_DB.filter((a) => a.id !== idAlumno);
+    // return this.obtenerAlumnos();
 
-  obtenerAlumnos() {
-    return of(ALUMNOS_DB).pipe(delay(1000));
-  }
-
-  
-  obtenerAlumnoID(id:number): Observable<Alumno | undefined>{
-    return of(ALUMNOS_DB.find((a) => a.id == id)).pipe(delay(1000));
+    return this.httpClient
+      .delete<Alumno>(`${enviroment.apiUrl}/alumnos/${idAlumno}`)
+      .pipe(
+        mergeMap(() => this.obtenerAlumnos()),
+        catchError((error) => {
+          this.alertaService.mostrarError('Error al intentar borrar');
+          return of([]);
+        })
+      );
   }
 }

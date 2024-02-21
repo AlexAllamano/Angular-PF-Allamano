@@ -9,13 +9,12 @@ import { AlumnosModule } from './pages/alumnos/alumnos.module';
 import { MatTableModule } from '@angular/material/table';
 import { CursosModule } from './pages/cursos/cursos.module';
 import { RouterModule } from '@angular/router';
-import { AlumnosComponent } from './pages/alumnos/alumnos.component';
 import { DetalleAlumnoComponent } from './pages/alumnos/detalle-alumno/detalle-alumno.component';
 import { MatListModule } from '@angular/material/list';
 import { HomeComponent } from './pages/home/home.component';
-import { CursosComponent } from './pages/cursos/cursos.component';
 import { MatCardModule } from '@angular/material/card';
 import { HomeModule } from './pages/home/home.module';
+import { adminGuard } from '../../core/guards/admin.guard';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -43,11 +42,14 @@ import { HomeModule } from './pages/home/home.module';
       },
       {
         path: 'cursos',
-        component: CursosComponent,
+        canActivate: [adminGuard],
+        loadChildren: () => import('../dashboard/pages/cursos/cursos.module').then((m) => m.CursosModule)
+
       },
       {
         path: 'alumnos',
-        component: AlumnosComponent,
+        canActivate: [adminGuard],        
+        loadChildren: () => import('../dashboard/pages/alumnos/alumnos.module').then((m) => m.AlumnosModule)
       },
       {
         path: 'alumnos/:id',

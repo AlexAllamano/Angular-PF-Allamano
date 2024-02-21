@@ -1,0 +1,37 @@
+{
+  "alumnos": [
+    {
+      "id": "1",
+      "nombre": "Alex",
+      "apellido": "Allamanoaaaa",
+      "correo": "aallamano@gmail.com",
+      "password": "1234",
+      "rol": "ALUMNO",
+      "sexo": "Masculino",
+      "edad": 24,
+      "cursos": []
+    },
+    {
+      "id": "2",
+      "nombre": "Constanza",
+      "apellido": "Rodríguez",
+      "correo": "crodriguez@gmail.com",
+      "password": "1234",
+      "rol": "ALUMNO",
+      "sexo": "Femenino",
+      "edad": 20,
+      "cursos": [
+        {
+          "id": 2,
+          "nombre": "Desarrollo Web con React",
+          "fechaInicio": "2024-04-01",
+          "fechaFin": "2024-04-30",
+          "cupo": 25,
+          "alumnos": [],
+          "profesor": null
+        }
+      ]
+    }
+  ],
+  "cursos": []
+}

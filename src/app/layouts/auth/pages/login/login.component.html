@@ -1,1 +1,42 @@
-<p>login works!</p>
+<div class="login">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title> <h1>Login</h1> </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="loginForm" class="row" (ngSubmit)="hacerLogin()">
+        <div class="col-12">
+          <mat-form-field class="w-100">
+            <mat-label>Correo</mat-label>
+            <input formControlName="correo" matInput />
+          </mat-form-field>
+        </div>
+        <div class="col-12">
+          <mat-form-field class="w-100">
+            <mat-label>Contraseña</mat-label>
+            <input
+              formControlName="password"
+              matInput
+              [type]="mostrarPass ? 'text' : 'password'"
+            />
+            <button
+              matSuffix
+              mat-icon-button
+              (click)="mostrarPass = !mostrarPass"
+              type="button"
+            >
+              <mat-icon *ngIf="!mostrarPass">visibility</mat-icon>
+              <mat-icon *ngIf="mostrarPass">visibility_off</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="col-12">
+          <button mat-flat-button color="primary" class="w-100" type="submit">
+            Ingresar
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

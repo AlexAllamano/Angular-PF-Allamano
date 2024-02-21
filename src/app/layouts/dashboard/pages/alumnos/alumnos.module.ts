@@ -16,6 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 import { HelpersModule } from '../../../../helpers/helpers.module';
 import { RouterModule } from '@angular/router';
 import { DetalleAlumnoComponent } from './detalle-alumno/detalle-alumno.component';
+import { AlumnosRoutingModule } from './alumnos-routing.module';
 
 
 @NgModule({
@@ -32,7 +33,7 @@ import { DetalleAlumnoComponent } from './detalle-alumno/detalle-alumno.componen
     MatIconModule,
     MatCardModule,    
     HelpersModule,
-    RouterModule
+    AlumnosRoutingModule
   ],
   exports: [AlumnosComponent],
 })
