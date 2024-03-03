@@ -5,8 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { enviroment } from '../../../enviroments/entiroment';
 import { AlertasService } from './alertas.service';
 
-let ALUMNOS_DB: Alumno[] = [];
-
 @Injectable({
   providedIn: 'root',
 })

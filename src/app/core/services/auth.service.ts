@@ -2,9 +2,13 @@ import { Injectable } from '@angular/core';
 import { Alumno } from '../../models/alumno.model';
 import { Router } from '@angular/router';
 import { AlertasService } from './alertas.service';
-import { delay, finalize, map, of, tap } from 'rxjs';
+import { catchError, delay, finalize, map, of, tap } from 'rxjs';
 import { LoadingService } from './loading.service';
 import { AlumnosService } from './alumnos.service';
+import { Store } from '@ngrx/store';
+import { AuthActions } from '../store/auth/actions';
+import { HttpClient } from '@angular/common/http';
+import { enviroment } from '../../../enviroments/entiroment';
 
 interface LoginData {
   correo: null | string;
@@ -18,13 +22,13 @@ let alumno: Alumno = null;
   providedIn: 'root',
 })
 export class AuthService {
-  authAlumno: Alumno | null = null;
-
   constructor(
     private router: Router,
     private alumnosService: AlumnosService,
     private alertasServices: AlertasService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private httpClient: HttpClient,
+    private store: Store
   ) {
     this.alumnosService.obtenerAlumnos().subscribe({
       next: (alumnos) => {
@@ -37,9 +41,9 @@ export class AuthService {
     });
   }
 
-  private setAuthAlumno(mockAlumno: Alumno) {
-    this.authAlumno = mockAlumno;
-    localStorage.setItem('token', 'paosguansdusfpajsnw');
+  private setAuthAlumno(alumno: Alumno) {
+    this.store.dispatch(AuthActions.setAuthAlumno({ alumno: alumno }));
+    localStorage.setItem('token', alumno.token);
   }
 
   login(data: LoginData): void {
@@ -55,8 +59,7 @@ export class AuthService {
       if (data.password == alumno.password) {
         this.setAuthAlumno(alumno);
         this.router.navigate(['main', 'home']);
-      }
-      else {
+      } else {
         this.alertasServices.mostrarError('Contraseña incorrecta');
       }
     } else {
@@ -65,19 +68,31 @@ export class AuthService {
   }
 
   logout() {
-    this.authAlumno = null;
+    this.store.dispatch(AuthActions.logout());
     localStorage.removeItem('token');
     this.router.navigate(['auth', 'login']);
   }
 
   verificarToken() {
-    this.loadingService.estaCargando(true);
-
-    return of(localStorage.getItem('token')).pipe(
-      delay(1500),
-      map((response) => !!response),
-      tap(() => this.setAuthAlumno(alumno)),
-      finalize(() => this.loadingService.estaCargando(false))
+    return (
+      this.httpClient
+        .get<Alumno[]>(
+          `${enviroment.apiUrl}/alumnos?token=${localStorage.getItem('token')}`
+        )
+        .pipe(
+          map((response) => {
+            if (response.length) {
+              this.setAuthAlumno(response[0]);
+              return true;
+            } else {
+              this.store.dispatch(AuthActions.logout());
+              localStorage.removeItem('token');
+              return false;
+            }
+          }),
+          catchError(() => of(false))
+        )
+      
     );
   }
 }

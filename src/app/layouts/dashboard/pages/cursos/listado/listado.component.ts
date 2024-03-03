@@ -11,7 +11,7 @@ import { Curso } from '../../../../../models/curso.model';
 export class ListadoComponent {
 
   constructor(){
-
+    
   }
 
   dataSource: MatTableDataSource<Curso> = new MatTableDataSource<Curso>([]);

@@ -77,6 +77,7 @@ export class FormComponent implements OnInit, OnChanges {
         id: Date.now().toString(),
         edad: this.formulario.value.edad,
         sexo: this.formulario.value.sexo,
+        token: ''
       };
       this.nuevoAlumnoCreado.emit(this.nuevoAlumno);
       this.formulario.reset();
@@ -96,6 +97,7 @@ export class FormComponent implements OnInit, OnChanges {
         id: this.alumnoEdit.id,
         edad: this.formulario.value.edad,
         sexo: this.formulario.value.sexo,
+        token: ''
       };
 
       this.alumnoEditado.emit(this.nuevoAlumno);

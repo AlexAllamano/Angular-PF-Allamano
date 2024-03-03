@@ -52,6 +52,10 @@ import { adminGuard } from '../../core/guards/admin.guard';
         loadChildren: () => import('../dashboard/pages/alumnos/alumnos.module').then((m) => m.AlumnosModule)
       },
       {
+        path: 'inscripciones',
+        loadChildren: () => import('./pages/inscripciones/inscripciones.module').then((m) => m.InscripcionesModule)
+      },
+      {
         path: 'alumnos/:id',
         component: DetalleAlumnoComponent,
       },

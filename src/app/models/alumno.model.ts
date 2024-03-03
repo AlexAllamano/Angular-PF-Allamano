@@ -9,5 +9,6 @@ export interface Alumno {
     rol: string;
     sexo: string;
     edad: number;
+    token: string;
     cursos: Curso[];
   }

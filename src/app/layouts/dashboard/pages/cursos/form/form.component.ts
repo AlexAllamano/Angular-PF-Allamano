@@ -65,11 +65,10 @@ export class FormComponent implements OnInit, OnChanges {
       this.nuevoCurso = {
         nombre: this.formulario.value.nombre,
         cupo: this.formulario.value.cupo,
-        fechaFin: this.formulario.value.fechaFin.toLocaleDateString('en-GB'),
-        fechaInicio:
-          this.formulario.value.fechaInicio.toLocaleDateString('en-GB'),
+        fechaFin: this.formulario.value.fechaFin,
+        fechaInicio: this.formulario.value.fechaInicio,
+
         id: Date.now(),
-        profesor: null,
         alumnos: [],
       };
 
@@ -83,14 +82,12 @@ export class FormComponent implements OnInit, OnChanges {
 
   guardarEdicion() {
     if (this.formulario.valid) {
-
       this.nuevoCurso = {
         nombre: this.formulario.value.nombre,
         cupo: this.formulario.value.cupo,
         fechaFin: this.formulario.value.fechaFin,
         fechaInicio: this.formulario.value.fechaInicio,
         id: this.cursoEdit.id,
-        profesor: null,
         alumnos: [],
       };
       console.log(this.nuevoCurso, 'FORM EDITADO');

@@ -1,5 +1,4 @@
 import { Alumno } from "./alumno.model";
-import { Profesor } from "./profesor.model";
 
 export interface Curso {
     id: number;
@@ -8,5 +7,4 @@ export interface Curso {
     fechaFin: Date;
     cupo: number;
     alumnos: Alumno[];
-    profesor: Profesor
   }

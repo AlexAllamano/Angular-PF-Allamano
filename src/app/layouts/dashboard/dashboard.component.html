@@ -15,6 +15,9 @@
       <div class="d-flex justify-content-start align-items-center">
         <mat-icon color="m-0 p-0">collections_bookmark</mat-icon><a (click)="navLateral.toggle()" routerLink="cursos" mat-list-item>  Cursos </a>
       </div>
+      <div class="d-flex justify-content-start align-items-center">
+        <mat-icon color="m-0 p-0">list_alt</mat-icon><a (click)="navLateral.toggle()" routerLink="inscripciones" mat-list-item>  Inscripciones </a>
+      </div>
     </mat-nav-list>
 
   </mat-drawer>
@@ -41,14 +44,17 @@
         <mat-icon>menu</mat-icon>
       </button>
       <span appTituloEstilo>Registrar<b>Alumnos</b></span>
-      <button
-        mat-icon-button
-        class="icono"
-        aria-label="Example icon-button with menu icon"
-        (click)="perfil.toggle()"
-      >
-        <mat-icon>account_circle</mat-icon>
-      </button>
+      <div class="d-flex align-items-center">
+        <h3 *ngIf="authUser$ | async; let alumno" >Bienvenido {{alumno.nombre}}</h3>
+        <button
+          mat-icon-button
+          class="icono"
+          aria-label="Example icon-button with menu icon"
+          (click)="perfil.toggle()"
+        >
+          <mat-icon>account_circle</mat-icon>
+        </button>
+      </div>
     </div>
   </mat-toolbar>
 

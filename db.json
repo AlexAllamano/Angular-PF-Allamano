@@ -6,8 +6,9 @@
       "apellido": "Allamanoaaaa",
       "correo": "aallamano@gmail.com",
       "password": "1234",
-      "rol": "ALUMNO",
+      "rol": "ADMIN",
       "sexo": "Masculino",
+      "token": "paosguansdusfpajsnw1",
       "edad": 24,
       "cursos": []
     },
@@ -20,7 +21,8 @@
       "cursos": [],
       "edad": 23,
       "id": "123",
-      "sexo": "masculino"
+      "sexo": "masculino",
+      "token": "paosguansdusfpajsnw2"
     },
     {
       "id": "2",
@@ -30,7 +32,8 @@
       "password": "1234",
       "rol": "ALUMNO",
       "sexo": "Femenino",
-      "edad": 20,
+      "token": "paosguansdusfpajsnw3",
+      "edad": 21,
       "cursos": [
         {
           "id": 2,
@@ -42,7 +45,59 @@
           "profesor": null
         }
       ]
+    },
+    {
+      "id": "1709402020065",
+      "nombre": "María",
+      "apellido": "Manzanelli",
+      "cursos": [],
+      "correo": "mmanzanelli@gmail.com",
+      "rol": "ALUMNO",
+      "password": "1234",
+      "edad": "26",
+      "sexo": "Femenino",
+      "token": ""
     }
   ],
-  "cursos": []
+  "cursos": [
+    {
+      "id": "1",
+      "nombre": "Introducción a Angular",
+      "fechaFin": "2024-03-28T03:00:00.000Z",
+      "fechaInicio": "2024-03-05T03:00:00.000Z",
+      "cupo": 30,
+      "alumnos": []
+    },
+    {
+      "id": "2",
+      "nombre": "Desarrollo Web con React",
+      "fechaFin": "2024-03-21T03:00:00.000Z",
+      "fechaInicio": "2024-03-05T03:00:00.000Z",
+      "cupo": 25,
+      "alumnos": []
+    },
+    {
+      "id": "1709401983282",
+      "nombre": "Diseño gráfico",
+      "cupo": 50,
+      "fechaFin": "2024-03-21T03:00:00.000Z",
+      "fechaInicio": "2024-01-10T03:00:00.000Z",
+      "alumnos": []
+    },
+    {
+      "id": "1709403046869",
+      "nombre": "dasda",
+      "cupo": 21,
+      "fechaFin": "2024-03-24T03:00:00.000Z",
+      "fechaInicio": "2024-02-09T03:00:00.000Z",
+      "alumnos": []
+    }
+  ],
+  "inscripciones": [
+    {
+      "id": "1",
+      "alumnoId": "1",
+      "cursoId": "1"
+    }
+  ]
 }
