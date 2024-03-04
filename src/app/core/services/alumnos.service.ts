@@ -26,6 +26,17 @@ export class AlumnosService {
     );
   }
 
+  obtenerSoloAlumnos(): Observable<Alumno[]> {
+    return this.httpClient.get<Alumno[]>(`${enviroment.apiUrl}/alumnos?rol=ALUMNO`).pipe(
+      catchError((error) => {
+        this.alertaService.mostrarError(
+          'Error al cargar los alumnos, intente de nuevo más tarde'
+        );
+        return of([]);
+      })
+    );
+  }
+
   obtenerAlumnoID(id: string): Observable<Alumno | undefined> {
     // return of(ALUMNOS_DB.find((a) => a.id == id)).pipe(delay(1000));
     return this.httpClient.get<Alumno>(`${enviroment.apiUrl}/alumnos/${id}`);

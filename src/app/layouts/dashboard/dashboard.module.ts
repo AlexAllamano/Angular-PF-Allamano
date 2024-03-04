@@ -53,6 +53,7 @@ import { adminGuard } from '../../core/guards/admin.guard';
       },
       {
         path: 'inscripciones',
+        canActivate: [adminGuard],    
         loadChildren: () => import('./pages/inscripciones/inscripciones.module').then((m) => m.InscripcionesModule)
       },
       {

@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [NombreApellidoPipe, TituloEstiloDirective],
@@ -21,6 +22,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatTableModule,
     MatButtonModule,
     MatIconModule,
+    MatSelectModule,
     MatCardModule,
     MatDialogModule,
     MatFormFieldModule,

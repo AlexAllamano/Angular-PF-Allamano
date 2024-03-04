@@ -98,6 +98,16 @@
       "id": "1",
       "alumnoId": "1",
       "cursoId": "1"
+    },
+    {
+      "id": "13ad",
+      "alumnoId": "2",
+      "cursoId": "2"
+    },
+    {
+      "id": "111f",
+      "alumnoId": "2",
+      "cursoId": "1709401983282"
     }
   ]
 }

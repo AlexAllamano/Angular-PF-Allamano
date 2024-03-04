@@ -7,3 +7,5 @@ export const selectInscripcionesState = createFeatureSelector<fromInscripciones.
 
 export const selectIncsripciones = createSelector(selectInscripcionesState, (state) => state.inscripcions)
 export const selectLoading = createSelector(selectInscripcionesState, (state) => state.loading)
+export const selectAlumnos = createSelector(selectInscripcionesState, (state) => state.alumnos)
+export const selectCrusos = createSelector(selectInscripcionesState, (state) => state.cursos)
